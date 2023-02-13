@@ -1,10 +1,12 @@
 local M = {}
 
+local theme = 'onedark'
+
 function M.setup()
   require('lualine').setup {
     options = {
       icons_enabled = false,
-      theme = 'nord',
+      theme = theme,
       component_separators = '|',
       section_separators = '',
     },
@@ -25,7 +27,7 @@ function M.setup()
     },
   }
 
-  vim.cmd.colorscheme('onedark')
+  vim.cmd.colorscheme(theme)
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
   -- @TODO add fix for adding transparency back to NormalFloat when existing
   -- transparency mode ie. :TransparentDisable

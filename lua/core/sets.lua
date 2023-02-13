@@ -24,6 +24,8 @@ function M.setup()
     vim.o.mouse = 'a'
     vim.o.breakindent = true
     vim.o.completeopt = "menuone,noselect"
+    vim.o.spelllang='en'
+    vim.o.spellsuggest=best,9
 end
 
 return M
