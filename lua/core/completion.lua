@@ -5,6 +5,34 @@ function M.setup()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
 
+    local kind_icons = {
+      Text = "",
+      Method = "m",
+      Function = "",
+      Constructor = "",
+      Field = "",
+      Variable = "",
+      Class = "",
+      Interface = "",
+      Module = "",
+      Property = "",
+      Unit = "",
+      Value = "",
+      Enum = "",
+      Keyword = "",
+      Snippet = "",
+      Color = "",
+      File = "",
+      Reference = "",
+      Folder = "",
+      EnumMember = "",
+      Constant = "",
+      Struct = "",
+      Event = "",
+      Operator = "",
+      TypeParameter = "",
+    }
+
     cmp.setup {
         snippet = { expand = function(args)
             luasnip.lsp_expand(args.body)
@@ -39,7 +67,37 @@ function M.setup()
         },
         sources = {
             { name = 'nvim_lsp' },
+            { name = 'buffer' },
+            { name = 'path' },
             { name = 'luasnip' },
+            { name = 'nvim_lua' },
+        },
+        formatting = {
+            fields = { 'kind', 'abbr', 'menu' },
+
+            format = function(entry, item)
+                item.kind = string.format('%s %s', kind_icons[item.kind], item.kind)
+                item.menu = ({
+                    nvim_lsp = '[lsp]',
+                    luasnip = '[snippet]',
+                    buffer = '[buffer]',
+                    path = '[path]',
+                })[entry.source.name]
+                return item
+            end,
+        },
+        confirm_opts = {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+        },
+        window = {
+            documentation = {
+                border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            },
+        },
+        experimental = {
+            ghost_text = true,
+            native_menu = false,
         },
     }
 end

@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 require("core.small").setup()
 require("core.treesitter").setup()
 require("core.lsp").setup()
---require("core.completion").setup()
+require("core.completion").setup()
 require("core.sets").setup()
 require("core.theme").setup()
 require("core.remaps").setup()
